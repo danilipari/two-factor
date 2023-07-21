@@ -8,9 +8,14 @@
     "child_process": "^1.0.2",
     "qrcode": "^1.5.3",
     "speakeasy": "^2.0.0",
-    "thirty-two": "^1.0.2"
+    "thirty-two": "^1.0.2",
+    "time2fa": "^1.2.2"
   },
   "devDependencies": {
     "@types/speakeasy": "^2.0.7"
+  },
+  "engines": {
+    "node": ">= 18 || 18.16.0",
+    "npm": ">= 9 || 9.5.1"
   }
 }
