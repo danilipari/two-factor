@@ -1,12 +1,14 @@
 import speakeasy from 'speakeasy';
 import base32 from 'thirty-two';
-import qrcode from 'qrcode';
+import * as qrcode from "qrcode";
 import fs from 'fs';
 import { exec } from 'child_process';
 import { Totp } from "time2fa";
 
 const qrcodeGen = false;
 const logs = !false;
+
+const qrcodeGenT2F = false;
 
 /**
  * Genera una chiave segreta utilizzando la libreria `speakeasy`.
@@ -134,3 +136,23 @@ if (!qrcodeGen) {
 const writeFile = (filePath, html) => {
   fs.writeFileSync(filePath, html);
 };
+
+/* time2fa */
+
+const config = {
+  user: 'd.lipari',
+  issuer: 's-managment',
+};
+
+const key = Totp.generateKey(config);
+
+qrcodeGenT2F && qrcode.toDataURL(key.url, (err, url) => {
+  console.log(url);
+});
+
+const valid = Totp.validate({ passcode: "123456", secret: key.secret });
+
+console.log(valid);
+
+console.log('\n time2fa -->', key);
+console.log('\n valid -->', valid);
